@@ -491,6 +491,11 @@ app.post('/api/suggest-recipe', (req, res) => {
 });
 
 // For Vercel, listen on the port provided by the environment, or a default for local testing
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+}
+
+// Export the app for Vercel serverless deployment
+module.exports = app;
