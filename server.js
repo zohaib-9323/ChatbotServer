@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+const fetch = require("node-fetch");
 const app = express();
 const port = process.env.PORT || 3001; // Use Vercel's assigned port or 3001 locally
 
@@ -369,9 +371,9 @@ const healthConditionsData = {
         "Combines fresh fruit, strained yogurt, and crunchy granola for an easy breakfast, packable in a Mason jar.",
         "High-Blood-Pressure-Friendly,Heart-Healthy,Low-Sodium",
         [
-          {"ingredient": "Fresh Strawberries", "measure": "1/2 cup"},
-          {"ingredient": "Strained Yogurt", "measure": "1/2 cup"},
-          {"ingredient": "Low-Sodium Granola", "measure": "1/4 cup"}
+          { ingredient: "Fresh Strawberries", measure: "1/2 cup" },
+          { ingredient: "Strained Yogurt", measure: "1/2 cup" },
+          { ingredient: "Low-Sodium Granola", measure: "1/4 cup" },
         ],
         "5 mins"
       ),
@@ -382,10 +384,10 @@ const healthConditionsData = {
         "Uses frozen bananas, kefir, peanut butter, and flaxmeal for a healthy smoothie with protein, probiotics, and healthy fats.",
         "High-Blood-Pressure-Friendly,Heart-Healthy,Low-Sodium",
         [
-          {"ingredient": "Frozen Bananas", "measure": "1"},
-          {"ingredient": "Kefir", "measure": "1 cup"},
-          {"ingredient": "Peanut Butter", "measure": "1 Tbsp"},
-          {"ingredient": "Flaxmeal", "measure": "1 Tbsp"}
+          { ingredient: "Frozen Bananas", measure: "1" },
+          { ingredient: "Kefir", measure: "1 cup" },
+          { ingredient: "Peanut Butter", measure: "1 Tbsp" },
+          { ingredient: "Flaxmeal", measure: "1 Tbsp" },
         ],
         "5 mins"
       ),
@@ -396,10 +398,10 @@ const healthConditionsData = {
         "Gluten-free sweet potato toast topped with spinach, egg, and hot sauce, a delicious alternative to eggs Benedict.",
         "High-Blood-Pressure-Friendly,Heart-Healthy,Low-Sodium,Gluten-Free",
         [
-          {"ingredient": "Sweet Potato", "measure": "1 slice"},
-          {"ingredient": "Spinach", "measure": "1/2 cup"},
-          {"ingredient": "Egg", "measure": "1"},
-          {"ingredient": "Hot Sauce", "measure": "to taste"}
+          { ingredient: "Sweet Potato", measure: "1 slice" },
+          { ingredient: "Spinach", measure: "1/2 cup" },
+          { ingredient: "Egg", measure: "1" },
+          { ingredient: "Hot Sauce", measure: "to taste" },
         ],
         "15 mins"
       ),
@@ -410,9 +412,9 @@ const healthConditionsData = {
         "Crispy baked kale chips to convert kale skeptics, best when not overcrowding baking pans.",
         "High-Blood-Pressure-Friendly,Heart-Healthy,Low-Sodium",
         [
-          {"ingredient": "Kale", "measure": "1 bunch"},
-          {"ingredient": "Olive Oil", "measure": "1 Tbsp"},
-          {"ingredient": "Pepper", "measure": "to taste"}
+          { ingredient: "Kale", measure: "1 bunch" },
+          { ingredient: "Olive Oil", measure: "1 Tbsp" },
+          { ingredient: "Pepper", measure: "to taste" },
         ],
         "20 mins"
       ),
@@ -423,13 +425,13 @@ const healthConditionsData = {
         "Sweetened only with fruit, gets omega-3s from flaxseeds.",
         "High-Blood-Pressure-Friendly,Heart-Healthy,Low-Sodium",
         [
-          {"ingredient": "Strawberries", "measure": "1/2 cup"},
-          {"ingredient": "Banana", "measure": "1"},
-          {"ingredient": "Flaxseeds", "measure": "1 Tbsp"},
-          {"ingredient": "Water or Unsweetened Almond Milk", "measure": "1 cup"}
+          { ingredient: "Strawberries", measure: "1/2 cup" },
+          { ingredient: "Banana", measure: "1" },
+          { ingredient: "Flaxseeds", measure: "1 Tbsp" },
+          { ingredient: "Water or Unsweetened Almond Milk", measure: "1 cup" },
         ],
         "5 mins"
-      )
+      ),
     ],
   },
   "high cholesterol": {
@@ -533,10 +535,10 @@ const healthConditionsData = {
         "A tasty and easy sheet pan dinner featuring chicken, lemons, and green olives, adding flavor and promoting heart health.",
         "Low-Cholesterol,Heart-Healthy",
         [
-          {"ingredient": "Chicken Breast", "measure": "1 lb"},
-          {"ingredient": "Lemons", "measure": "2, sliced"},
-          {"ingredient": "Green Olives", "measure": "1/2 cup"},
-          {"ingredient": "Olive Oil", "measure": "2 Tbsp"}
+          { ingredient: "Chicken Breast", measure: "1 lb" },
+          { ingredient: "Lemons", measure: "2, sliced" },
+          { ingredient: "Green Olives", measure: "1/2 cup" },
+          { ingredient: "Olive Oil", measure: "2 Tbsp" },
         ],
         "35 mins"
       ),
@@ -547,12 +549,12 @@ const healthConditionsData = {
         "Incorporates fresh parsley, onion, and toasted pine nuts, all with cholesterol-lowering properties, for a heart-healthy salad.",
         "Low-Cholesterol,Heart-Healthy,Vegetarian",
         [
-          {"ingredient": "Kale", "measure": "2 cups"},
-          {"ingredient": "Falafel", "measure": "4 pieces"},
-          {"ingredient": "Fresh Parsley", "measure": "1/4 cup"},
-          {"ingredient": "Onion", "measure": "1/4, chopped"},
-          {"ingredient": "Toasted Pine Nuts", "measure": "2 Tbsp"},
-          {"ingredient": "Hummus", "measure": "2 Tbsp"}
+          { ingredient: "Kale", measure: "2 cups" },
+          { ingredient: "Falafel", measure: "4 pieces" },
+          { ingredient: "Fresh Parsley", measure: "1/4 cup" },
+          { ingredient: "Onion", measure: "1/4, chopped" },
+          { ingredient: "Toasted Pine Nuts", measure: "2 Tbsp" },
+          { ingredient: "Hummus", measure: "2 Tbsp" },
         ],
         "20 mins"
       ),
@@ -563,11 +565,11 @@ const healthConditionsData = {
         "A zesty Mexican casserole topped with eggs, featuring garlic and onion, suitable for low-cholesterol diets.",
         "Low-Cholesterol,Heart-Healthy",
         [
-          {"ingredient": "Eggs", "measure": "4"},
-          {"ingredient": "Garlic", "measure": "2 cloves, minced"},
-          {"ingredient": "Onion", "measure": "1/2, chopped"},
-          {"ingredient": "Corn Tortillas", "measure": "6, cut into strips"},
-          {"ingredient": "Tomato Salsa", "measure": "1 cup"}
+          { ingredient: "Eggs", measure: "4" },
+          { ingredient: "Garlic", measure: "2 cloves, minced" },
+          { ingredient: "Onion", measure: "1/2, chopped" },
+          { ingredient: "Corn Tortillas", measure: "6, cut into strips" },
+          { ingredient: "Tomato Salsa", measure: "1 cup" },
         ],
         "30 mins"
       ),
@@ -578,10 +580,10 @@ const healthConditionsData = {
         "Uses sliced flank steak low in saturated fat, with broccoli to lower LDL and boost HDL cholesterol, ideal for slow cooking.",
         "Low-Cholesterol,Heart-Healthy",
         [
-          {"ingredient": "Flank Steak", "measure": "1 lb, sliced"},
-          {"ingredient": "Broccoli", "measure": "2 cups"},
-          {"ingredient": "Low-Sodium Soy Sauce", "measure": "1/4 cup"},
-          {"ingredient": "Garlic", "measure": "2 cloves, minced"}
+          { ingredient: "Flank Steak", measure: "1 lb, sliced" },
+          { ingredient: "Broccoli", measure: "2 cups" },
+          { ingredient: "Low-Sodium Soy Sauce", measure: "1/4 cup" },
+          { ingredient: "Garlic", measure: "2 cloves, minced" },
         ],
         "45 mins"
       ),
@@ -592,13 +594,13 @@ const healthConditionsData = {
         "Features salmon rich in omega-3 fats, with broccoli, garlic, and tomatoes for additional cholesterol-fighting power.",
         "Low-Cholesterol,Heart-Healthy",
         [
-          {"ingredient": "Salmon Fillets", "measure": "2 (6 oz each)"},
-          {"ingredient": "Broccoli", "measure": "2 cups"},
-          {"ingredient": "Garlic", "measure": "2 cloves, minced"},
-          {"ingredient": "Tomatoes", "measure": "1 cup, chopped"}
+          { ingredient: "Salmon Fillets", measure: "2 (6 oz each)" },
+          { ingredient: "Broccoli", measure: "2 cups" },
+          { ingredient: "Garlic", measure: "2 cloves, minced" },
+          { ingredient: "Tomatoes", measure: "1 cup, chopped" },
         ],
         "30 mins"
-      )
+      ),
     ],
   },
   "celiac disease": {
@@ -1538,8 +1540,15 @@ const healthConditionsData = {
         "Healthy,Vegetarian,Italian",
         [
           { ingredient: "Cooked Pasta (100% whole wheat)", measure: "2 cups" },
-          { ingredient: "Non-starchy Vegetables (e.g., bell peppers, cucumbers, tomatoes)", measure: "1 cup" },
-          { ingredient: "Protein (chicken, mozzarella, white beans)", measure: "1/2 cup" },
+          {
+            ingredient:
+              "Non-starchy Vegetables (e.g., bell peppers, cucumbers, tomatoes)",
+            measure: "1 cup",
+          },
+          {
+            ingredient: "Protein (chicken, mozzarella, white beans)",
+            measure: "1/2 cup",
+          },
           { ingredient: "Olive Oil", measure: "1 tbsp" },
           { ingredient: "Balsamic Vinegar", measure: "1 tbsp" },
         ],
@@ -1553,9 +1562,15 @@ const healthConditionsData = {
         "Healthy,Vegetarian,Soup",
         [
           { ingredient: "Lentils", measure: "1 cup" },
-          { ingredient: "Mixed Vegetables (carrots, celery, onions)", measure: "2 cups" },
+          {
+            ingredient: "Mixed Vegetables (carrots, celery, onions)",
+            measure: "2 cups",
+          },
           { ingredient: "Vegetable Broth", measure: "4 cups" },
-          { ingredient: "Spices (e.g., cumin, paprika)", measure: "1 tsp each" },
+          {
+            ingredient: "Spices (e.g., cumin, paprika)",
+            measure: "1 tsp each",
+          },
         ],
         "4 hours"
       ),
@@ -1675,13 +1690,22 @@ const healthConditionsData = {
           { ingredient: "Onion", measure: "1, diced" },
         ],
         "30 mins"
-      )
+      ),
     ],
   },
   "heart disease": {
-    "keywords": ["heart disease", "cardiovascular disease", "heart health", "cholesterol", "triglycerides", "atherosclerosis", "coronary artery disease"],
-    "clarification": "To help me suggest the best recipe for heart health, could you tell me if you have any other dietary restrictions or preferences, such as vegetarian, low-sodium, or specific cuisine types?",
-    "recipes": [
+    keywords: [
+      "heart disease",
+      "cardiovascular disease",
+      "heart health",
+      "cholesterol",
+      "triglycerides",
+      "atherosclerosis",
+      "coronary artery disease",
+    ],
+    clarification:
+      "To help me suggest the best recipe for heart health, could you tell me if you have any other dietary restrictions or preferences, such as vegetarian, low-sodium, or specific cuisine types?",
+    recipes: [
       generateRecipeData(
         "Fresh Fruit Kebabs with Lemon-Lime Dip",
         "Snack",
@@ -1689,11 +1713,11 @@ const healthConditionsData = {
         "Skewered fresh fruits served with a tangy lemon-lime dip, perfect for a light, heart-healthy snack.",
         "Heart-Healthy,Low-Sodium,Low-Fat,Vegetarian",
         [
-          {"ingredient": "Strawberries", "measure": "1 cup"},
-          {"ingredient": "Pineapple", "measure": "1 cup, cubed"},
-          {"ingredient": "Lemon Juice", "measure": "2 tbsp"},
-          {"ingredient": "Lime Juice", "measure": "2 tbsp"},
-          {"ingredient": "Honey", "measure": "1 tsp"}
+          { ingredient: "Strawberries", measure: "1 cup" },
+          { ingredient: "Pineapple", measure: "1 cup, cubed" },
+          { ingredient: "Lemon Juice", measure: "2 tbsp" },
+          { ingredient: "Lime Juice", measure: "2 tbsp" },
+          { ingredient: "Honey", measure: "1 tsp" },
         ],
         "15 mins"
       ),
@@ -1704,11 +1728,11 @@ const healthConditionsData = {
         "A refreshing smoothie made with green vegetables and fruits, packed with nutrients for heart health.",
         "Heart-Healthy,Low-Sodium,Vegetarian",
         [
-          {"ingredient": "Spinach", "measure": "1 cup"},
-          {"ingredient": "Kale", "measure": "1 cup"},
-          {"ingredient": "Banana", "measure": "1"},
-          {"ingredient": "Apple", "measure": "1, chopped"},
-          {"ingredient": "Water", "measure": "1 cup"}
+          { ingredient: "Spinach", measure: "1 cup" },
+          { ingredient: "Kale", measure: "1 cup" },
+          { ingredient: "Banana", measure: "1" },
+          { ingredient: "Apple", measure: "1, chopped" },
+          { ingredient: "Water", measure: "1 cup" },
         ],
         "5 mins"
       ),
@@ -1719,11 +1743,11 @@ const healthConditionsData = {
         "Baked salmon marinated with Southeast Asian flavors, rich in omega-3s for heart health.",
         "Heart-Healthy,Low-Sodium,Fish",
         [
-          {"ingredient": "Salmon Fillets", "measure": "2 (6 oz each)"},
-          {"ingredient": "Low-Sodium Soy Sauce", "measure": "2 tbsp"},
-          {"ingredient": "Ginger", "measure": "1 tsp, grated"},
-          {"ingredient": "Garlic", "measure": "1 clove, minced"},
-          {"ingredient": "Lime Juice", "measure": "1 tbsp"}
+          { ingredient: "Salmon Fillets", measure: "2 (6 oz each)" },
+          { ingredient: "Low-Sodium Soy Sauce", measure: "2 tbsp" },
+          { ingredient: "Ginger", measure: "1 tsp, grated" },
+          { ingredient: "Garlic", measure: "1 clove, minced" },
+          { ingredient: "Lime Juice", measure: "1 tbsp" },
         ],
         "25 mins"
       ),
@@ -1734,12 +1758,12 @@ const healthConditionsData = {
         "A salad combining spinach with fresh berries and a light dressing, high in antioxidants.",
         "Heart-Healthy,Low-Sodium,Vegetarian",
         [
-          {"ingredient": "Spinach", "measure": "2 cups"},
-          {"ingredient": "Strawberries", "measure": "1/2 cup, sliced"},
-          {"ingredient": "Blueberries", "measure": "1/2 cup"},
-          {"ingredient": "Almonds", "measure": "2 tbsp, sliced"},
-          {"ingredient": "Olive Oil", "measure": "1 tbsp"},
-          {"ingredient": "Balsamic Vinegar", "measure": "1 tbsp"}
+          { ingredient: "Spinach", measure: "2 cups" },
+          { ingredient: "Strawberries", measure: "1/2 cup, sliced" },
+          { ingredient: "Blueberries", measure: "1/2 cup" },
+          { ingredient: "Almonds", measure: "2 tbsp, sliced" },
+          { ingredient: "Olive Oil", measure: "1 tbsp" },
+          { ingredient: "Balsamic Vinegar", measure: "1 tbsp" },
         ],
         "10 mins"
       ),
@@ -1750,21 +1774,28 @@ const healthConditionsData = {
         "A hearty salad made with quinoa and vegetables, supporting heart health with fiber and nutrients.",
         "Heart-Healthy,Low-Sodium,Vegetarian",
         [
-          {"ingredient": "Quinoa", "measure": "1 cup, cooked"},
-          {"ingredient": "Bell Peppers", "measure": "1/2 cup, diced"},
-          {"ingredient": "Cucumbers", "measure": "1/2 cup, diced"},
-          {"ingredient": "Cherry Tomatoes", "measure": "1/2 cup, halved"},
-          {"ingredient": "Olive Oil", "measure": "1 tbsp"},
-          {"ingredient": "Lemon Juice", "measure": "1 tbsp"}
+          { ingredient: "Quinoa", measure: "1 cup, cooked" },
+          { ingredient: "Bell Peppers", measure: "1/2 cup, diced" },
+          { ingredient: "Cucumbers", measure: "1/2 cup, diced" },
+          { ingredient: "Cherry Tomatoes", measure: "1/2 cup, halved" },
+          { ingredient: "Olive Oil", measure: "1 tbsp" },
+          { ingredient: "Lemon Juice", measure: "1 tbsp" },
         ],
         "20 mins"
-      )
-    ]
+      ),
+    ],
   },
-  "osteoporosis": {
-    "keywords": ["osteoporosis", "bone health", "calcium", "vitamin D", "bone density"],
-    "clarification": "To help me suggest the best recipe for bone health, could you tell me if you have any other dietary restrictions or preferences, such as lactose intolerance, or specific cuisine types?",
-    "recipes": [
+  osteoporosis: {
+    keywords: [
+      "osteoporosis",
+      "bone health",
+      "calcium",
+      "vitamin D",
+      "bone density",
+    ],
+    clarification:
+      "To help me suggest the best recipe for bone health, could you tell me if you have any other dietary restrictions or preferences, such as lactose intolerance, or specific cuisine types?",
+    recipes: [
       generateRecipeData(
         "Skyr Yogurt Panna cotta with Raspberries, Flax Seed, Peppermint & Cocoa Powder",
         "Dessert",
@@ -1772,25 +1803,25 @@ const healthConditionsData = {
         "A creamy dessert made with skyr yogurt, topped with raspberries and healthy toppings for bone health.",
         "Bone-Healthy,High-Calcium,Vegetarian",
         [
-          {"ingredient": "Skyr Yogurt", "measure": "1 cup"},
-          {"ingredient": "Raspberries", "measure": "1/2 cup"},
-          {"ingredient": "Flax Seed", "measure": "1 tbsp"},
-          {"ingredient": "Peppermint", "measure": "1 tsp, chopped"},
-          {"ingredient": "Cocoa Powder", "measure": "1 tsp"}
+          { ingredient: "Skyr Yogurt", measure: "1 cup" },
+          { ingredient: "Raspberries", measure: "1/2 cup" },
+          { ingredient: "Flax Seed", measure: "1 tbsp" },
+          { ingredient: "Peppermint", measure: "1 tsp, chopped" },
+          { ingredient: "Cocoa Powder", measure: "1 tsp" },
         ],
         "20 mins prep + 2 hours chill"
       ),
       generateRecipeData(
-        "Harri’s Sardine Sandwich with Mustard & Yogurt Butter",
+        "Harri's Sardine Sandwich with Mustard & Yogurt Butter",
         "Lunch",
         "General",
         "A sandwich featuring sardines with a tangy mustard and yogurt spread, rich in calcium and vitamin D.",
         "Bone-Healthy,High-Calcium,Fish",
         [
-          {"ingredient": "Sardines", "measure": "1 can (4 oz), drained"},
-          {"ingredient": "Mustard", "measure": "1 tsp"},
-          {"ingredient": "Yogurt", "measure": "2 tbsp"},
-          {"ingredient": "Whole-Grain Bread", "measure": "2 slices"}
+          { ingredient: "Sardines", measure: "1 can (4 oz), drained" },
+          { ingredient: "Mustard", measure: "1 tsp" },
+          { ingredient: "Yogurt", measure: "2 tbsp" },
+          { ingredient: "Whole-Grain Bread", measure: "2 slices" },
         ],
         "10 mins"
       ),
@@ -1801,24 +1832,24 @@ const healthConditionsData = {
         "A flavorful Moroccan dish with lamb, prunes, and a yogurt sauce, supporting bone health with calcium-rich ingredients.",
         "Bone-Healthy,High-Calcium",
         [
-          {"ingredient": "Lamb", "measure": "1 lb, cubed"},
-          {"ingredient": "Prunes", "measure": "1/2 cup"},
-          {"ingredient": "Almonds", "measure": "1/4 cup"},
-          {"ingredient": "Sesame Seeds", "measure": "1 tbsp"},
-          {"ingredient": "Yogurt", "measure": "1/2 cup"}
+          { ingredient: "Lamb", measure: "1 lb, cubed" },
+          { ingredient: "Prunes", measure: "1/2 cup" },
+          { ingredient: "Almonds", measure: "1/4 cup" },
+          { ingredient: "Sesame Seeds", measure: "1 tbsp" },
+          { ingredient: "Yogurt", measure: "1/2 cup" },
         ],
         "1 hour"
       ),
       generateRecipeData(
-        "Smoked Gouda Alaskan King Crab Mac ‘n Cheese",
+        "Smoked Gouda Alaskan King Crab Mac 'n Cheese",
         "Main Dish",
         "American",
         "A comforting dish with smoked gouda and Alaskan king crab, high in calcium for bone health.",
         "Bone-Healthy,High-Calcium",
         [
-          {"ingredient": "Smoked Gouda", "measure": "1 cup, shredded"},
-          {"ingredient": "Alaskan King Crab", "measure": "1/2 lb"},
-          {"ingredient": "Whole-Grain Pasta", "measure": "2 cups, cooked"}
+          { ingredient: "Smoked Gouda", measure: "1 cup, shredded" },
+          { ingredient: "Alaskan King Crab", measure: "1/2 lb" },
+          { ingredient: "Whole-Grain Pasta", measure: "2 cups, cooked" },
         ],
         "40 mins"
       ),
@@ -1829,14 +1860,14 @@ const healthConditionsData = {
         "Pasta tubes filled with spinach and ricotta cheese, baked with a tomato sauce, rich in calcium.",
         "Bone-Healthy,High-Calcium,Vegetarian",
         [
-          {"ingredient": "Spinach", "measure": "2 cups, chopped"},
-          {"ingredient": "Ricotta Cheese", "measure": "1 cup"},
-          {"ingredient": "Whole-Grain Pasta", "measure": "8 tubes"},
-          {"ingredient": "Tomato Sauce", "measure": "1 cup"}
+          { ingredient: "Spinach", measure: "2 cups, chopped" },
+          { ingredient: "Ricotta Cheese", measure: "1 cup" },
+          { ingredient: "Whole-Grain Pasta", measure: "8 tubes" },
+          { ingredient: "Tomato Sauce", measure: "1 cup" },
         ],
         "45 mins"
-      )
-    ]
+      ),
+    ],
   },
 };
 
@@ -1853,9 +1884,36 @@ for (const conditionKey in healthConditionsData) {
     allRecipesFlat.push(...conditionInfo.recipes);
   }
 }
+const YOUTUBE_API_KEY = "AIzaSyBYVpzKZP_bIKCNo5U-IB3hjZ9M7sF3eTs";
+const YOUTUBE_SEARCH_BASE_URL = "https://www.googleapis.com/youtube/v3/search";
+
+async function searchYouTubeVideos(query, maxResults = 3) {
+  try {
+    const response = await fetch(
+      `${YOUTUBE_SEARCH_BASE_URL}?key=${YOUTUBE_API_KEY}&q=${encodeURIComponent(
+        query
+      )}&part=snippet&type=video&maxResults=${maxResults}`
+    );
+    console.log("YouTube API Response:", response);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("YouTube API Error:", errorText);
+      return [];
+    }
+
+    const data = await response.json();
+
+    return data.items.map(
+      (item) => `https://www.youtube.com/watch?v=${item.id.videoId}`
+    );
+  } catch (err) {
+    console.error("Error fetching from YouTube:", err);
+    return [];
+  }
+}
 
 // API Endpoint
-app.post("/api/suggest-recipe", (req, res) => {
+app.post("/api/suggest-recipe", async (req, res) => {
   const userPrompt = req.body.prompt ? req.body.prompt.toLowerCase() : "";
 
   if (!userPrompt) {
@@ -1864,17 +1922,18 @@ app.post("/api/suggest-recipe", (req, res) => {
 
   const promptKeywords = new Set(
     userPrompt.split(/\s+/).filter((word) => word.length > 2)
-  ); // Filter out short words
+  );
 
   let suggestedRecipe = null;
   let clarificationMessage = null;
   let matchedByCondition = false;
 
-  // 1. Try to find a matching health condition/dietary need
+  // 1. Match Health Condition
   for (const conditionKey in healthConditionsData) {
     const conditionInfo = healthConditionsData[conditionKey];
     if (conditionInfo.keywords.some((keyword) => promptKeywords.has(keyword))) {
       matchedByCondition = true;
+
       if (conditionKey === "allergies") {
         let foundAllergen = null;
         for (const allergenType in conditionInfo.recipes) {
@@ -1887,9 +1946,7 @@ app.post("/api/suggest-recipe", (req, res) => {
         if (foundAllergen) {
           suggestedRecipe =
             conditionInfo.recipes[foundAllergen][
-              Math.floor(
-                Math.random() * conditionInfo.recipes[foundAllergen].length
-              )
+              Math.floor(Math.random() * conditionInfo.recipes[foundAllergen].length)
             ];
           clarificationMessage = conditionInfo.clarification.replace(
             "which ingredients you need to avoid?",
@@ -1905,15 +1962,13 @@ app.post("/api/suggest-recipe", (req, res) => {
           ];
         clarificationMessage = conditionInfo.clarification;
       }
-      break; // Found a condition match, prioritize it
+      break;
     }
   }
 
-  // 2. If no specific health condition, try to match by ingredients
+  // 2. Match by Ingredients
   if (!matchedByCondition) {
-    // Extract potential ingredient keywords from the prompt (could be improved with NLP)
     const potentialIngredients = Array.from(promptKeywords);
-
     let bestIngredientMatchRecipe = null;
     let maxMatchedIngredients = 0;
 
@@ -1926,16 +1981,12 @@ app.post("/api/suggest-recipe", (req, res) => {
       for (const potentialIng of potentialIngredients) {
         if (recipeIngredients.has(potentialIng)) {
           currentMatchedIngredients++;
-        } else {
-          // Also check if any ingredient in the recipe contains the potential ingredient keyword
-          // This provides a partial match, e.g., 'chicken' matches 'Grilled Chicken Breast'
-          if (
-            Array.from(recipeIngredients).some((rIng) =>
-              rIng.includes(potentialIng)
-            )
-          ) {
-            currentMatchedIngredients++;
-          }
+        } else if (
+          Array.from(recipeIngredients).some((rIng) =>
+            rIng.includes(potentialIng)
+          )
+        ) {
+          currentMatchedIngredients++;
         }
       }
 
@@ -1946,14 +1997,13 @@ app.post("/api/suggest-recipe", (req, res) => {
     }
 
     if (maxMatchedIngredients > 0) {
-      // If at least one ingredient matched
       suggestedRecipe = bestIngredientMatchRecipe;
       clarificationMessage =
         "Based on the ingredients you mentioned, here's a recipe. Let me know if you have other dietary needs!";
     }
   }
 
-  // 3. If still no specific match, suggest a general healthy recipe
+  // 3. Fallback General Healthy
   if (!suggestedRecipe) {
     const generalHealthyInfo = healthConditionsData["general healthy"];
     suggestedRecipe =
@@ -1964,18 +2014,42 @@ app.post("/api/suggest-recipe", (req, res) => {
       "I couldn't find a specific match for your request, but here's a general healthy suggestion. Could you clarify your needs or ingredients further?";
   }
 
+  // 4. YouTube Search
+  let videoLinks = [];
+  if (suggestedRecipe?.strMeal || suggestedRecipe?.name) {
+    const recipeName = suggestedRecipe.strMeal || suggestedRecipe.name;
+    const query = `${recipeName} recipe`;
+    const maxResults = 3;
+
+    try {
+      const response = await fetch(
+        `${YOUTUBE_SEARCH_BASE_URL}?key=${YOUTUBE_API_KEY}&q=${encodeURIComponent(
+          query
+        )}&part=snippet&type=video&maxResults=${maxResults}`
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("YouTube API Error:", errorText);
+      } else {
+        const data = await response.json();
+        console.log("YouTube API Result:", data);
+        videoLinks = data.items
+          .filter((item) => item.id && item.id.videoId)
+          .map((item) => `https://www.youtube.com/watch?v=${item.id.videoId}`);
+      }
+    } catch (err) {
+      console.error("Error fetching from YouTube:", err);
+    }
+  }
+
+  // 5. Respond
   res.json({
     clarification: clarificationMessage,
     recipe: suggestedRecipe,
+    videoLinks: videoLinks,
   });
 });
-
-// For Vercel, listen on the port provided by the environment, or a default for local testing
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-  });
-}
 
 // Export the app for Vercel serverless deployment
 module.exports = app;
