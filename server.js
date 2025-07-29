@@ -2053,3 +2053,11 @@ app.post("/api/suggest-recipe", async (req, res) => {
 
 // Export the app for Vercel serverless deployment
 module.exports = app;
+
+// Start the server (only if not in Vercel environment)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`API endpoint: http://localhost:${port}/api/suggest-recipe`);
+  });
+}
